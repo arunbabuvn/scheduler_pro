@@ -22,7 +22,7 @@ class IntroScreen extends StatelessWidget {
                   Pixels.screenWidth * (16 / Pixels.figmaScreenWidth),
                 ),
                 width: Pixels.screenWidth,
-                height: Pixels.screenHeight / 1.9,
+                height: Pixels.screenHeight * (460 / Pixels.figmaScreenHeight),
                 decoration: const BoxDecoration(color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

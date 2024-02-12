@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:scheduler_pro/components/custom_button.dart';
 import 'package:scheduler_pro/components/pixels.dart';
 import 'package:scheduler_pro/screens/onboarding/onboarding_screen1.dart';
@@ -47,7 +48,9 @@ class OnboardingScreen extends StatelessWidget {
                   fontSize: Pixels.screenWidth * (19 / Pixels.figmaScreenWidth),
                   fontWeight: FontWeight.w700,
                   textColor: Colors.white,
-                  onTap: () {},
+                  onTap: () {
+                    context.push("/signIn");
+                  },
                 ),
               )
             ],
