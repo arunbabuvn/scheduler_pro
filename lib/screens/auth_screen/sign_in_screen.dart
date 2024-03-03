@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:scheduler_pro/components/custom_button.dart';
 import 'package:scheduler_pro/components/custom_textfield.dart';
 import 'package:scheduler_pro/components/pixels.dart';
 import 'package:scheduler_pro/components/text_style.dart';
+import 'package:scheduler_pro/screens/auth_screen/bloc/auth_bloc.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignInScreen extends StatelessWidget {
+  SignInScreen({super.key});
 
-  @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
   bool? passwordVisible = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
+          height: Pixels.screenHeight,
           width: Pixels.screenWidth,
           padding: EdgeInsets.all(
             Pixels.screenWidth * (16 / Pixels.figmaScreenWidth),
@@ -41,25 +41,51 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               Gap(Pixels.screenHeight * (64 / Pixels.figmaScreenHeight)),
               CustomTextfield(
+                controller: emailController,
                 hintText: "Email ID",
                 keyboardType: TextInputType.emailAddress,
               ),
               Gap(Pixels.screenHeight * (16 / Pixels.figmaScreenHeight)),
-              CustomTextfield(
-                hintText: "Password",
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: !passwordVisible!,
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is ShowPasswordState && state.showPassword) {
+                    passwordVisible = state.showPassword;
+                  } else if (state is ShowPasswordState &&
+                      !state.showPassword) {
+                    passwordVisible = state.showPassword;
+                  }
+                },
+                builder: (context, state) {
+                  return CustomTextfield(
+                    controller: passwordController,
+                    hintText: "Password",
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: !passwordVisible!,
+                  );
+                },
               ),
               Gap(Pixels.screenHeight * (8 / Pixels.figmaScreenHeight)),
               Row(
                 children: [
-                  Checkbox(
-                    activeColor: const Color(0xFF3392FF),
-                    value: passwordVisible,
-                    onChanged: (value) {
-                      setState(() {
-                        passwordVisible = value;
-                      });
+                  BlocConsumer<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      if (state is ShowPasswordState && state.showPassword) {
+                        passwordVisible = state.showPassword;
+                      } else if (state is ShowPasswordState &&
+                          !state.showPassword) {
+                        passwordVisible = state.showPassword;
+                      }
+                    },
+                    builder: (context, state) {
+                      return Checkbox(
+                        activeColor: const Color(0xFF3392FF),
+                        value: passwordVisible,
+                        onChanged: (value) {
+                          context
+                              .read<AuthBloc>()
+                              .add(ShowPasswordEvent(showPassword: value!));
+                        },
+                      );
                     },
                   ),
                   PrimaryText(
@@ -136,16 +162,41 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               const Spacer(),
-              CustomButton(
-                onTap: () {
-                  context.push('/main');
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthentiateLoadingState) {
+                    const CircularProgressIndicator();
+                  } else if (state is AuthenticatedState) {
+                    context.push('/main');
+                  } else if (state is UnauthenticatedState) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        content: Text(state.errorMessage),
+                      ),
+                    );
+                  }
                 },
-                text: "Login",
-                buttonColor: const Color(0xFF3392FF),
-                fontSize: Pixels.screenWidth * (19 / Pixels.figmaScreenWidth),
-                fontWeight: FontWeight.w700,
-                textColor: Colors.white,
-              )
+                builder: (context, state) {
+                  return CustomButton(
+                    onTap: () {
+                      context.read<AuthBloc>().add(
+                            LoginWithEmailEvent(
+                              emailId: emailController.text,
+                              password: passwordController.text,
+                            ),
+                          );
+                    },
+                    text: "Login",
+                    buttonColor: const Color(0xFF3392FF),
+                    fontSize:
+                        Pixels.screenWidth * (19 / Pixels.figmaScreenWidth),
+                    fontWeight: FontWeight.w700,
+                    textColor: Colors.white,
+                  );
+                },
+              ),
+              Gap(Pixels.screenHeight * (20 / Pixels.figmaScreenHeight))
             ],
           ),
         ),

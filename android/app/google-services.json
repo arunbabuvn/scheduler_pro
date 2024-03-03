@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "240439362542",
+    "project_id": "scheduler-pro-3d24d",
+    "storage_bucket": "scheduler-pro-3d24d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240439362542:android:1a5568152d55f4096884ff",
+        "android_client_info": {
+          "package_name": "com.example.scheduler_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6hxMGMRu6vDpqead7aWLhScTgKA1GSo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
