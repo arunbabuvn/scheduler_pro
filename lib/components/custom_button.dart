@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:scheduler_pro/components/pixels.dart';
 import 'package:scheduler_pro/components/text_style.dart';
 
@@ -8,6 +10,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.onTap,
     required this.text,
+    required this.isLoading,
     this.textColor,
     this.fontSize,
     this.fontWeight,
@@ -19,6 +22,7 @@ class CustomButton extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final Color? buttonColor;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +39,17 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           onTap: onTap,
           child: Center(
-              child: PrimaryText(
-            child: text,
-            color: textColor,
-            fontSize: fontSize,
-            fontWeight: fontWeight,
-          )),
+            child: isLoading
+                ? const CupertinoActivityIndicator(
+                    color: Colors.white,
+                  )
+                : PrimaryText(
+                    child: text,
+                    color: textColor,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                  ),
+          ),
         ),
       ),
     );

@@ -9,29 +9,34 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Center(
-        child: BlocConsumer<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is AuthentiateLoadingState) {
-              const CircularProgressIndicator();
-            } else if (state is UnauthenticatedState) {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  content: Text(state.errorMessage),
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            return ElevatedButton(
-              child: const Text("Sign Out"),
-              onPressed: () {
-                context.read<AuthBloc>().add(LogoutEvent());
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthLoadingState && state.isLoading) {
+                  const CircularProgressIndicator();
+                } else if (state is AuthErrorState) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      content: Text(state.errorMessage),
+                    ),
+                  );
+                }
               },
-            );
-          },
-        ),
+              builder: (context, state) {
+                return ElevatedButton(
+                  child: const Text("Sign Out"),
+                  onPressed: () {
+                    context.read<AuthBloc>().add(LogoutEvent());
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

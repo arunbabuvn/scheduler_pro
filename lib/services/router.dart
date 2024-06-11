@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:scheduler_pro/auth_flow.dart';
 import 'package:scheduler_pro/screens/auth_screen/sign_in_screen.dart';
 import 'package:scheduler_pro/screens/auth_screen/sign_up_screen.dart';
-import 'package:scheduler_pro/screens/intro_screen.dart';
 import 'package:scheduler_pro/screens/main_screen.dart';
 import 'package:scheduler_pro/screens/onboarding/onboarding_screen.dart';
 
@@ -22,7 +21,7 @@ final appRoute = GoRouter(
     ),
     GoRoute(
       path: "/signUp",
-      builder: (context, state) => const SignUpScreen(),
+      builder: (context, state) => SignUpScreen(),
     ),
     GoRoute(
       path: "/main",

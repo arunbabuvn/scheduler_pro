@@ -9,32 +9,28 @@ class CustomTextfield extends StatelessWidget {
     required this.keyboardType,
     this.obscureText = false,
     this.controller,
+    this.validator,
   });
 
   final String? hintText;
   final TextInputType? keyboardType;
   bool obscureText;
   final TextEditingController? controller;
+  String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: Pixels.screenWidth * (16 / Pixels.figmaScreenWidth),
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F7),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextFormField(
-        controller: controller,
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hintText,
-          hintStyle: GoogleFonts.inter(fontSize: 16),
-        ),
+    return TextFormField(
+      validator: validator,
+      controller: controller,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: const Color(0xFFF5F5F7),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
+        hintText: hintText,
+        hintStyle: GoogleFonts.inter(fontSize: 16),
       ),
     );
   }

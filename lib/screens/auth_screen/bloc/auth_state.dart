@@ -2,15 +2,16 @@ part of 'auth_bloc.dart';
 
 abstract class AuthState extends Equatable {}
 
-class AuthenticateInitialState extends AuthState {
+class AuthInitialState extends AuthState {
   @override
   List<Object> get props => [];
 }
 
-class AuthentiateLoadingState extends AuthState {
-  AuthentiateLoadingState();
+class AuthLoadingState extends AuthState {
+  bool isLoading;
+  AuthLoadingState(this.isLoading);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [isLoading];
 }
 
 class AuthenticatedState extends AuthState {
@@ -20,9 +21,9 @@ class AuthenticatedState extends AuthState {
   List<Object> get props => [];
 }
 
-class UnauthenticatedState extends AuthState {
+class AuthErrorState extends AuthState {
   final String errorMessage;
-  UnauthenticatedState(this.errorMessage);
+  AuthErrorState(this.errorMessage);
   @override
   List<Object> get props => [errorMessage];
 }

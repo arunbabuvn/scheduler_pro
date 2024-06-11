@@ -43,6 +43,7 @@ class OnboardingScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: CustomButton(
+                  isLoading: false,
                   text: "Next",
                   buttonColor: const Color(0xFF3392FF),
                   fontSize: Pixels.screenWidth * (19 / Pixels.figmaScreenWidth),
