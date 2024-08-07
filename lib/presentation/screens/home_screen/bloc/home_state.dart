@@ -2,16 +2,49 @@ part of 'home_bloc.dart';
 
 class HomeState extends Equatable {
   final int taskIndex;
-  const HomeState({required this.taskIndex});
+  final bool taskEmpty;
+  final bool taskLoading;
+  final bool taskLoadingFailed;
+  final List<Tasks> tasks;
+  final String errorMessage;
 
-  factory HomeState.initial(){
-    return const HomeState(taskIndex: 0);
+  const HomeState({
+    required this.taskIndex,
+    required this.taskEmpty,
+    required this.taskLoading,
+    required this.taskLoadingFailed,
+    required this.tasks,
+    required this.errorMessage,
+  });
+
+  factory HomeState.initial() {
+    return const HomeState(
+      taskIndex: 0,
+      taskEmpty: false,
+      taskLoading: false,
+      tasks: [],
+      errorMessage: "",
+      taskLoadingFailed: false,
+    );
   }
 
-  HomeState copyWith({int? taskIndex}) {
-    return HomeState(taskIndex: taskIndex ?? this.taskIndex);
+  HomeState copyWith(
+      {int? taskIndex,
+      bool? taskEmpty,
+      bool? taskLoading,
+      List<Tasks>? tasks,
+      String? errorMessage,
+      bool? taskLoadingFailed}) {
+    return HomeState(
+      taskIndex: taskIndex ?? this.taskIndex,
+      taskEmpty: taskEmpty ?? this.taskEmpty,
+      taskLoading: taskLoading ?? this.taskLoading,
+      tasks: tasks ?? this.tasks,
+      errorMessage: errorMessage ?? this.errorMessage,
+      taskLoadingFailed: taskLoadingFailed ?? this.taskLoadingFailed,
+    );
   }
 
   @override
-  List<Object> get props => [taskIndex];
+  List<Object> get props => [taskIndex, taskEmpty, taskLoading, tasks, errorMessage, taskLoadingFailed];
 }

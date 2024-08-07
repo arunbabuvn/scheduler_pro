@@ -10,4 +10,9 @@ sealed class HomeEvent extends Equatable {
 class HomeTaskChangeEvent extends HomeEvent {
   const HomeTaskChangeEvent({required this.taskIndex});
   final int taskIndex;
+
+  @override
+  List<Object> get props => [taskIndex];
 }
+
+class LoadTasksEvent extends HomeEvent {}
