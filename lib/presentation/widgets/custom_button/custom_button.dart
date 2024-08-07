@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scheduler_pro/core/theme/app_colors.dart';
+import 'package:scheduler_pro/core/theme/app_text_style.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -42,10 +43,8 @@ class CustomButton extends StatelessWidget {
                   )
                 : Text(
                     text,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
+                    style: AppTextStyle.largeBold.copyWith(
+                      color: textColor ?? Colors.white,
                     ),
                   ),
           ),
