@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/add_task_screen/add_task_screen.dart';
+import 'package:scheduler_pro/presentation/screens/calander_screen/calander_screen.dart';
 import 'package:scheduler_pro/presentation/screens/home_screen/home_screen.dart';
 import 'package:scheduler_pro/presentation/screens/main_screen/bloc/navigation_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/search_screen/search_screen.dart';
@@ -17,7 +18,9 @@ class MainScreen extends StatelessWidget {
               ? const HomeScreen()
               : (state.bottomNavigationIndex == 1
                   ? const SearchScreen()
-                  : (state.bottomNavigationIndex == 2 ? const AddTaskScreen() : Container()));
+                  : (state.bottomNavigationIndex == 2
+                      ? const AddTaskScreen()
+                      : (state.bottomNavigationIndex == 3 ? const CalanderScreen() : Container())));
         },
       ),
       bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
