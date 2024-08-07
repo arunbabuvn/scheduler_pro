@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scheduler_pro/core/theme/app_theme.dart';
 import 'package:scheduler_pro/firebase_options.dart';
+import 'package:scheduler_pro/presentation/screens/add_task_screen/bloc/add_task_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/home_screen/bloc/home_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/main_screen/bloc/navigation_bloc.dart';
 import 'package:scheduler_pro/presentation/routes/router.dart';
-import 'package:scheduler_pro/presentation/screens/signin_screen/bloc/signin_bloc.dart';
+import 'package:scheduler_pro/presentation/screens/auth_screens/bloc/auth_bloc.dart';
 import 'package:scheduler_pro/presentation/widgets/custom_textfield/cubit/date_and_time_cubit.dart';
 
 void main() async {
@@ -26,14 +27,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => SigninBloc(
-            firebaseAuth: FirebaseAuth.instance,
-          ),
-        ),
+        BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => NavigationBloc()),
-        BlocProvider(create: (context) => HomeBloc()),
-        // BlocProvider(create: (context) => DateAndTimeCubit())
+        // BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => AddTaskBloc()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(393, 852),
