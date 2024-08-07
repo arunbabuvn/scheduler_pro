@@ -13,17 +13,18 @@ class SearchScreen extends StatelessWidget {
     final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Search",
+          style: AppTextStyle.title3,
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Search",
-                style: AppTextStyle.title3,
-              ),
-              16.verticalSpace,
               CustomTextfield(hintText: "Search", keyboardType: TextInputType.name),
               30.verticalSpace,
               ListView.builder(
