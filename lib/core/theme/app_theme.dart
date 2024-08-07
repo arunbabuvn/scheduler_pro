@@ -13,6 +13,8 @@ class AppTheme {
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.lightBackgroundColor,
+      centerTitle: true,
+      surfaceTintColor: AppColors.lightBackgroundColor,
     ),
     dialogTheme: const DialogTheme(
       backgroundColor: AppColors.lightBackgroundColor,
