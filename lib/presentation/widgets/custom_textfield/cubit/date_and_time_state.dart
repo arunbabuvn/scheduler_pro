@@ -6,8 +6,8 @@ class DateAndTimeState extends Equatable {
   const DateAndTimeState({required this.date, required this.time});
   factory DateAndTimeState.initial() {
     return const DateAndTimeState(
-      date: "MMM DD, YYYY",
-      time: "00:00 AM",
+      date: "",
+      time: "",
     );
   }
 
