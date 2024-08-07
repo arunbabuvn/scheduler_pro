@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:scheduler_pro/auth_flow.dart';
 import 'package:scheduler_pro/presentation/screens/accounts_screen/accounts_screen.dart';
-import 'package:scheduler_pro/presentation/screens/signin_screen/signin_screen.dart';
-import 'package:scheduler_pro/presentation/screens/signup_screen/signup_screen.dart';
+import 'package:scheduler_pro/presentation/screens/auth_screens/signin_screen/signin_screen.dart';
+import 'package:scheduler_pro/presentation/screens/auth_screens/signup_screen/signup_screen.dart';
+import 'package:scheduler_pro/presentation/screens/intro_screen/intro_screen.dart';
 import 'package:scheduler_pro/presentation/screens/main_screen/main_screen.dart';
 import 'package:scheduler_pro/presentation/screens/onboarding/onboarding_screen.dart';
 
@@ -10,7 +11,18 @@ final appRoute = GoRouter(
   routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) => const AuthFlow(),
+      redirect: (context, state) {
+        if (FirebaseAuth.instance.currentUser != null) {
+          return "/main";
+        } else {
+          return "/intro";
+        }
+      },
+    ),
+    GoRoute(
+      path: "/intro",
+      name: "intro",
+      builder: (context, state) => const IntroScreen(),
     ),
     GoRoute(
       path: "/onboarding",
