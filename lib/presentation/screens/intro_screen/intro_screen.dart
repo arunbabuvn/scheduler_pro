@@ -25,8 +25,9 @@ class IntroScreen extends StatelessWidget {
                   children: [
                     80.verticalSpace,
                     Text(
-                      "Stay organized with your schedules",
+                      "Welcome to Scheduler Pro.",
                       style: AppTextStyle.title1,
+                      textAlign: TextAlign.center,
                     ),
                     8.verticalSpace,
                     Text(
@@ -36,7 +37,7 @@ class IntroScreen extends StatelessWidget {
                     const Spacer(),
                     CustomButton(
                       isLoading: false,
-                      text: "GetStarted",
+                      text: "Get Started",
                       fontSize: 19.sp,
                       fontWeight: FontWeight.w700,
                       buttonColor: const Color(0xFF3392FF),
