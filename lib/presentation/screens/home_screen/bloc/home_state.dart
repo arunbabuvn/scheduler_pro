@@ -5,7 +5,7 @@ class HomeState extends Equatable {
   final bool taskEmpty;
   final bool taskLoading;
   final bool taskLoadingFailed;
-  final List<Tasks> tasks;
+  final tasks;
   final String errorMessage;
 
   const HomeState({
@@ -23,18 +23,13 @@ class HomeState extends Equatable {
       taskEmpty: false,
       taskLoading: false,
       tasks: [],
-      errorMessage: "",
+      errorMessage: "Error",
       taskLoadingFailed: false,
     );
   }
 
   HomeState copyWith(
-      {int? taskIndex,
-      bool? taskEmpty,
-      bool? taskLoading,
-      List<Tasks>? tasks,
-      String? errorMessage,
-      bool? taskLoadingFailed}) {
+      {int? taskIndex, bool? taskEmpty, bool? taskLoading, tasks, String? errorMessage, bool? taskLoadingFailed}) {
     return HomeState(
       taskIndex: taskIndex ?? this.taskIndex,
       taskEmpty: taskEmpty ?? this.taskEmpty,

@@ -19,7 +19,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> _onLoadTasks(LoadTasksEvent event, Emitter<HomeState> emit) async {
     emit(state.copyWith(taskLoading: true));
     try {
-      var snapshot = await TasksRepository().getTasks();
+      List<Tasks> snapshot = await TasksRepository().getTasks();
       if (snapshot.isEmpty) {
         emit(state.copyWith(taskLoading: false, taskEmpty: true));
       }

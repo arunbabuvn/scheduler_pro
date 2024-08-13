@@ -129,7 +129,6 @@ class HomeScreen extends StatelessWidget {
                 ),
                 16.verticalSpace,
                 BlocBuilder<HomeBloc, HomeState>(
-                  // listener: (context, state) => context.read<HomeBloc>().add(LoadTasksEvent()),
                   builder: (context, state) {
                     if (state.taskLoading) {
                       return const Expanded(
