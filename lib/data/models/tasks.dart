@@ -1,4 +1,5 @@
 class Tasks {
+  final String docId;
   final String title;
   final String location;
   final String date;
@@ -8,6 +9,7 @@ class Tasks {
   final String description;
 
   Tasks({
+    required this.docId,
     required this.title,
     required this.location,
     required this.date,
@@ -17,8 +19,9 @@ class Tasks {
     required this.description,
   });
 
-  factory Tasks.fromMap(Map<String, dynamic> doc) {
+  factory Tasks.fromMap(Map<String, dynamic> doc, docId) {
     return Tasks(
+      docId: docId,
       title: doc['title'],
       location: doc['location'],
       date: doc['date'],
