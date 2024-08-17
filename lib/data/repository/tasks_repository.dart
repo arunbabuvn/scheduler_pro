@@ -6,7 +6,15 @@ class TasksRepository {
   final User? _user = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> addTask(title, location, date, startTime, endTime, priority, description) async {
+  Future<void> addTask(
+    title,
+    location,
+    date,
+    startTime,
+    endTime,
+    priority,
+    description,
+  ) async {
     if (_user != null) {
       await _firestore.collection(_user.email!).add({
         'title': title,
@@ -20,8 +28,16 @@ class TasksRepository {
     }
   }
 
-  Future<List<Tasks>> getTasks() async {
-    final snapshot = await _firestore.collection(_user!.email!).get();
-    return snapshot.docs.map((doc) => Tasks.fromMap(doc.data())).toList();
+  Future<void> deleteTask(docId) async {
+    if (_user != null) {
+      await _firestore.collection(_user.email!).doc(docId).delete();
+    }
+  }
+
+  Stream<List<Tasks>> getTasks() {
+    return _firestore
+        .collection(_user!.email!)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => Tasks.fromMap(doc.data(), doc.id)).toList());
   }
 }
