@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthState extends Equatable {
   final String email;
@@ -10,8 +11,9 @@ class AuthState extends Equatable {
   final bool signedIn;
   final bool isFailure;
   final String errorMessage;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  const AuthState({
+  AuthState({
     required this.email,
     required this.password,
     required this.confirmPassword,
@@ -24,7 +26,7 @@ class AuthState extends Equatable {
   });
 
   factory AuthState.initial() {
-    return const AuthState(
+    return AuthState(
       email: '',
       password: '',
       confirmPassword: '',

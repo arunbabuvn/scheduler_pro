@@ -6,6 +6,7 @@ import 'package:scheduler_pro/presentation/screens/auth_screens/signup_screen/si
 import 'package:scheduler_pro/presentation/screens/intro_screen/intro_screen.dart';
 import 'package:scheduler_pro/presentation/screens/main_screen/main_screen.dart';
 import 'package:scheduler_pro/presentation/screens/onboarding/onboarding_screen.dart';
+import 'package:scheduler_pro/presentation/screens/task_screen/task_screen.dart';
 
 final appRoute = GoRouter(
   routes: [
@@ -32,12 +33,12 @@ final appRoute = GoRouter(
     GoRoute(
       path: "/signIn",
       name: "signIn",
-      builder: (context, state) => SignInScreen(),
+      builder: (context, state) => const SignInScreen(),
     ),
     GoRoute(
       path: "/signUp",
       name: "signUp",
-      builder: (context, state) => SignUpScreen(),
+      builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
       path: "/main",
@@ -53,6 +54,14 @@ final appRoute = GoRouter(
       path: "/search",
       name: "search",
       builder: (context, state) => const AccountsScreen(),
+    ),
+    GoRoute(
+      path: "/task",
+      name: "task",
+      builder: (context, state) {
+        final data = state.extra! as Map<String, dynamic>;
+        return TaskScreen(data: data);
+      },
     ),
   ],
 );

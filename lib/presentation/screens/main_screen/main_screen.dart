@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scheduler_pro/core/theme/app_colors.dart';
 import 'package:scheduler_pro/presentation/screens/add_task_screen/add_task_screen.dart';
 import 'package:scheduler_pro/presentation/screens/calander_screen/calander_screen.dart';
 import 'package:scheduler_pro/presentation/screens/home_screen/home_screen.dart';
@@ -32,51 +33,144 @@ class MainScreen extends StatelessWidget {
                 currentIndex: state.bottomNavigationIndex,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
-                onTap: (value) =>
-                    context.read<NavigationBloc>().add(BottomNavigationItemSelected(bottomNavigationIndex: value)),
+                onTap: (value) => context.read<NavigationBloc>().add(
+                      BottomNavigationItemSelected(
+                        bottomNavigationIndex: value,
+                      ),
+                    ),
                 items: [
                   BottomNavigationBarItem(
                     icon: state.bottomNavigationIndex == 0
-                        ? const Icon(Icons.home, color: Colors.blue)
-                        : const Icon(
-                            Icons.home,
-                            color: Colors.black,
+                        ? Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.accentColor,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/home.png",
+                              width: 18,
+                              height: 20,
+                            ),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/home.png",
+                              width: 18,
+                              height: 20,
+                            ),
                           ),
                     label: "",
                   ),
                   BottomNavigationBarItem(
                     icon: state.bottomNavigationIndex == 1
-                        ? const Icon(Icons.search, color: Colors.blue)
-                        : const Icon(
-                            Icons.search,
-                            color: Colors.black,
+                        ? Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.accentColor,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/search.png",
+                              width: 25,
+                              height: 26,
+                            ),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/search.png",
+                              width: 25,
+                              height: 26,
+                            ),
                           ),
                     label: "",
                   ),
                   BottomNavigationBarItem(
                     icon: state.bottomNavigationIndex == 2
-                        ? const Icon(Icons.add, color: Colors.blue)
-                        : const Icon(
-                            Icons.add,
-                            color: Colors.black,
+                        ? Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.accentColor,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/add.png",
+                              width: 18,
+                              height: 20,
+                            ),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/add.png",
+                              width: 18,
+                              height: 20,
+                            ),
                           ),
                     label: "",
                   ),
                   BottomNavigationBarItem(
                     icon: state.bottomNavigationIndex == 3
-                        ? const Icon(Icons.calendar_month, color: Colors.blue)
-                        : const Icon(
-                            Icons.calendar_month,
-                            color: Colors.black,
+                        ? Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.accentColor,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/calender.png",
+                              width: 23,
+                              height: 23,
+                            ),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/calender.png",
+                              width: 23,
+                              height: 23,
+                            ),
                           ),
                     label: "",
                   ),
                   BottomNavigationBarItem(
                     icon: state.bottomNavigationIndex == 4
-                        ? const Icon(Icons.settings, color: Colors.blue)
-                        : const Icon(
-                            Icons.settings,
-                            color: Colors.black,
+                        ? Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.accentColor,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/settings.png",
+                              width: 24,
+                              height: 24,
+                            ),
+                          )
+                        : Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                              "assets/icons/settings.png",
+                              width: 24,
+                              height: 24,
+                            ),
                           ),
                     label: "",
                   ),

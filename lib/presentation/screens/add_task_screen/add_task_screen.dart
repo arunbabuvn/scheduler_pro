@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:image_stack/image_stack.dart';
+import 'package:go_router/go_router.dart';
 import 'package:scheduler_pro/core/theme/app_colors.dart';
 import 'package:scheduler_pro/core/theme/app_text_style.dart';
 import 'package:scheduler_pro/presentation/screens/add_task_screen/bloc/add_task_bloc.dart';
@@ -15,12 +15,6 @@ class AddTaskScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List<String> images = <String>[
-    //   "https://images.unsplash.com/photo-1458071103673-6a6e4c4a3413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
-    //   "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80",
-    //   "https://images.unsplash.com/photo-1470406852800-b97e5d92e2aa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
-    //   "https://images.unsplash.com/photo-1473700216830-7e08d47f858e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-    // ];
     final GlobalKey<FormState> form = GlobalKey<FormState>();
     final TextEditingController titleController = TextEditingController();
     final TextEditingController locationController = TextEditingController();
@@ -39,7 +33,7 @@ class AddTaskScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(16.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: SingleChildScrollView(
             child: Form(
               key: form,
@@ -336,6 +330,11 @@ class AddTaskScreen extends StatelessWidget {
                         endTimeController.clear();
                         descriptionController.clear();
                         context.read<AddTaskBloc>().add(TaskAdded());
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Task added successfully"),
+                          ),
+                        );
                       }
                     },
                     builder: (context, state) {
