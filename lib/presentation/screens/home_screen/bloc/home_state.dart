@@ -5,7 +5,7 @@ class HomeState extends Equatable {
   final bool taskEmpty;
   final bool taskLoading;
   final bool taskLoadingFailed;
-  final tasks;
+  final dynamic tasks;
   final String errorMessage;
 
   const HomeState({

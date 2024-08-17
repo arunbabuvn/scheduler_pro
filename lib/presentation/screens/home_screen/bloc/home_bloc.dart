@@ -16,15 +16,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(taskIndex: event.taskIndex));
   }
 
-  Future<void> _onLoadTasks(LoadTasksEvent event, Emitter<HomeState> emit) async {
+  void _onLoadTasks(LoadTasksEvent event, Emitter<HomeState> emit) async {
     emit(state.copyWith(taskLoading: true));
     try {
-      List<Tasks> snapshot = await TasksRepository().getTasks();
-      if (snapshot.isEmpty) {
-        emit(state.copyWith(taskLoading: false, taskEmpty: true));
-      }
-
-      emit(state.copyWith(taskLoading: false, taskEmpty: false, tasks: snapshot));
+      await emit.forEach<List<Tasks>>(
+        TasksRepository().getTasks(),
+        onData: (tasks) {
+          if (tasks.isEmpty) {
+            return state.copyWith(taskLoading: false, taskEmpty: true);
+          } else {
+            return state.copyWith(taskLoading: false, taskEmpty: false, tasks: tasks);
+          }
+        },
+        onError: (error, stackTrace) {
+          return state.copyWith(
+            taskLoading: false,
+            taskLoadingFailed: true,
+            errorMessage: error.toString(),
+          );
+        },
+      );
     } catch (e) {
       emit(
         state.copyWith(
