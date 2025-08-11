@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:go_router/go_router.dart';
 import 'package:scheduler_pro/core/theme/app_colors.dart';
 import 'package:scheduler_pro/core/theme/app_text_style.dart';
 import 'package:scheduler_pro/presentation/screens/add_task_screen/bloc/add_task_bloc.dart';
@@ -48,7 +47,9 @@ class AddTaskScreen extends StatelessWidget {
                   BlocBuilder<AddTaskBloc, AddTaskState>(
                     builder: (context, state) {
                       return CustomTextfield(
-                        validator: ValidationBuilder(requiredMessage: "Title is required").build(),
+                        validator: ValidationBuilder(
+                                requiredMessage: "Title is required")
+                            .build(),
                         controller: titleController,
                       );
                     },
@@ -62,7 +63,9 @@ class AddTaskScreen extends StatelessWidget {
                   BlocBuilder<AddTaskBloc, AddTaskState>(
                     builder: (context, state) {
                       return CustomTextfield(
-                        validator: ValidationBuilder(requiredMessage: "Location is required").build(),
+                        validator: ValidationBuilder(
+                                requiredMessage: "Location is required")
+                            .build(),
                         controller: locationController,
                       );
                     },
@@ -77,12 +80,15 @@ class AddTaskScreen extends StatelessWidget {
                     create: (context) => DateAndTimeCubit(),
                     child: BlocBuilder<DateAndTimeCubit, DateAndTimeState>(
                       builder: (context, state) {
-                        dateController = TextEditingController(text: state.date.toString());
+                        dateController =
+                            TextEditingController(text: state.date.toString());
                         return CustomTextfield(
                           showDate: true,
                           hintText: "MMM DD, YYYY",
                           controller: dateController,
-                          validator: ValidationBuilder(requiredMessage: "Date is required").build(),
+                          validator: ValidationBuilder(
+                                  requiredMessage: "Date is required")
+                              .build(),
                         );
                       },
                     ),
@@ -94,7 +100,8 @@ class AddTaskScreen extends StatelessWidget {
                         create: (context) => DateAndTimeCubit(),
                         child: BlocBuilder<DateAndTimeCubit, DateAndTimeState>(
                           builder: (context, state) {
-                            startTimeController = TextEditingController(text: state.time.toString());
+                            startTimeController = TextEditingController(
+                                text: state.time.toString());
                             return Row(
                               children: [
                                 Column(
@@ -111,7 +118,10 @@ class AddTaskScreen extends StatelessWidget {
                                         showTime: true,
                                         hintText: "00:00 AM",
                                         controller: startTimeController,
-                                        validator: ValidationBuilder(requiredMessage: "Time is required").build(),
+                                        validator: ValidationBuilder(
+                                                requiredMessage:
+                                                    "Time is required")
+                                            .build(),
                                       ),
                                     ),
                                     16.verticalSpace,
@@ -128,7 +138,8 @@ class AddTaskScreen extends StatelessWidget {
                         create: (context) => DateAndTimeCubit(),
                         child: BlocBuilder<DateAndTimeCubit, DateAndTimeState>(
                           builder: (context, state) {
-                            endTimeController = TextEditingController(text: state.time.toString());
+                            endTimeController = TextEditingController(
+                                text: state.time.toString());
                             return Row(
                               children: [
                                 Column(
@@ -145,7 +156,10 @@ class AddTaskScreen extends StatelessWidget {
                                         showTime: true,
                                         hintText: "00:00 AM",
                                         controller: endTimeController,
-                                        validator: ValidationBuilder(requiredMessage: "Time is required").build(),
+                                        validator: ValidationBuilder(
+                                                requiredMessage:
+                                                    "Time is required")
+                                            .build(),
                                       ),
                                     ),
                                     16.verticalSpace,
@@ -176,7 +190,8 @@ class AddTaskScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      context.read<AddTaskBloc>().add(const TaskPriority(priorityIndex: 0));
+                                      context.read<AddTaskBloc>().add(
+                                          const TaskPriority(priorityIndex: 0));
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
@@ -185,7 +200,8 @@ class AddTaskScreen extends StatelessWidget {
                                       ),
                                       decoration: BoxDecoration(
                                         border: state.priorityIndex == 0
-                                            ? Border.all(color: AppColors.primaryColor)
+                                            ? Border.all(
+                                                color: AppColors.primaryColor)
                                             : Border.all(),
                                         borderRadius: BorderRadius.circular(4),
                                       ),
@@ -194,7 +210,9 @@ class AddTaskScreen extends StatelessWidget {
                                           Text(
                                             "Low",
                                             style: AppTextStyle.small.copyWith(
-                                              color: state.priorityIndex == 0 ? AppColors.primaryColor : null,
+                                              color: state.priorityIndex == 0
+                                                  ? AppColors.primaryColor
+                                                  : null,
                                             ),
                                           ),
                                           4.horizontalSpace,
@@ -211,7 +229,8 @@ class AddTaskScreen extends StatelessWidget {
                                   8.horizontalSpace,
                                   InkWell(
                                     onTap: () {
-                                      context.read<AddTaskBloc>().add(const TaskPriority(priorityIndex: 1));
+                                      context.read<AddTaskBloc>().add(
+                                          const TaskPriority(priorityIndex: 1));
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
@@ -220,7 +239,8 @@ class AddTaskScreen extends StatelessWidget {
                                       ),
                                       decoration: BoxDecoration(
                                         border: state.priorityIndex == 1
-                                            ? Border.all(color: AppColors.primaryColor)
+                                            ? Border.all(
+                                                color: AppColors.primaryColor)
                                             : Border.all(),
                                         borderRadius: BorderRadius.circular(4),
                                       ),
@@ -229,7 +249,9 @@ class AddTaskScreen extends StatelessWidget {
                                           Text(
                                             "Medium",
                                             style: AppTextStyle.small.copyWith(
-                                              color: state.priorityIndex == 1 ? AppColors.primaryColor : null,
+                                              color: state.priorityIndex == 1
+                                                  ? AppColors.primaryColor
+                                                  : null,
                                             ),
                                           ),
                                           4.horizontalSpace,
@@ -246,7 +268,8 @@ class AddTaskScreen extends StatelessWidget {
                                   8.horizontalSpace,
                                   InkWell(
                                     onTap: () {
-                                      context.read<AddTaskBloc>().add(const TaskPriority(priorityIndex: 2));
+                                      context.read<AddTaskBloc>().add(
+                                          const TaskPriority(priorityIndex: 2));
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
@@ -255,7 +278,8 @@ class AddTaskScreen extends StatelessWidget {
                                       ),
                                       decoration: BoxDecoration(
                                         border: state.priorityIndex == 2
-                                            ? Border.all(color: AppColors.primaryColor)
+                                            ? Border.all(
+                                                color: AppColors.primaryColor)
                                             : Border.all(),
                                         borderRadius: BorderRadius.circular(4),
                                       ),
@@ -264,7 +288,9 @@ class AddTaskScreen extends StatelessWidget {
                                           Text(
                                             "High",
                                             style: AppTextStyle.small.copyWith(
-                                              color: state.priorityIndex == 2 ? AppColors.primaryColor : null,
+                                              color: state.priorityIndex == 2
+                                                  ? AppColors.primaryColor
+                                                  : null,
                                             ),
                                           ),
                                           4.horizontalSpace,

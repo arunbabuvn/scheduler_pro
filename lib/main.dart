@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,11 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scheduler_pro/core/theme/app_theme.dart';
 import 'package:scheduler_pro/firebase_options.dart';
 import 'package:scheduler_pro/presentation/screens/add_task_screen/bloc/add_task_bloc.dart';
-import 'package:scheduler_pro/presentation/screens/home_screen/bloc/home_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/main_screen/bloc/navigation_bloc.dart';
 import 'package:scheduler_pro/presentation/routes/router.dart';
 import 'package:scheduler_pro/presentation/screens/auth_screens/bloc/auth_bloc.dart';
-import 'package:scheduler_pro/presentation/widgets/custom_textfield/cubit/date_and_time_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +7,6 @@ import 'package:scheduler_pro/core/theme/app_colors.dart';
 import 'package:scheduler_pro/core/theme/app_text_style.dart';
 import 'package:scheduler_pro/presentation/screens/auth_screens/bloc/auth_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/auth_screens/bloc/auth_state.dart';
-import 'package:scheduler_pro/presentation/screens/home_screen/bloc/home_bloc.dart';
 import 'package:scheduler_pro/presentation/screens/task_screen/bloc/task_update_bloc.dart';
 import 'package:scheduler_pro/presentation/widgets/custom_button/custom_button.dart';
 
@@ -52,7 +50,8 @@ class TaskScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: Image.network(state.firebaseAuth.currentUser?.photoURL ??
+                                image: Image.network(state.firebaseAuth
+                                            .currentUser?.photoURL ??
                                         "https://s3-alpha-sig.figma.com/img/c007/b96d/10c6847941b93f45858be7d3ce3ff3ec?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SxjRywecKMyVDVLFAT6DRDa1BM~63bl4DvNTD7zbsG2ihcYR14C5W-bOtJTjp4PSmA2gEwocBcnqp2t0k1EPcTSFzCNkSoXlgSYu0QDVPgHoiI8z13NBLdEo7HD0ATlfcaoHY6AupjYn9j0-~0lJZN4ydgE2UQCYD~U15A-LM1sYi~dxxF0Hnk1ww7Q8m6c1WQ9bYdl~IbcPcu1AhfcSh8xJsffZ3R0RdOLNaH9itruIJe4yi~AnokhwBggvOOWh7XVX6rYpAkb-VUSFh4n5CA8hEa70irdK8Pm~~cpmvOGjEJyEuyUHeWEKMCHOV14DoAgt47Xx8DkBkJGHOc3d-Q__")
                                     .image,
                               ),
@@ -70,7 +69,9 @@ class TaskScreen extends StatelessWidget {
                   width: MediaQuery.sizeOf(context).width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: data["priority"] == "High" ? AppColors.primaryColor : AppColors.secondartyColor,
+                    color: data["priority"] == "High"
+                        ? AppColors.primaryColor
+                        : AppColors.secondartyColor,
                   ),
                   padding: EdgeInsets.all(24.w),
                   child: Column(
@@ -87,12 +88,14 @@ class TaskScreen extends StatelessWidget {
                             icon: Icon(
                               Icons.chevron_left,
                               size: 38,
-                              color:
-                                  data["priority"] == "High" ? AppColors.lightBackgroundColor : AppColors.darkTextColor,
+                              color: data["priority"] == "High"
+                                  ? AppColors.lightBackgroundColor
+                                  : AppColors.darkTextColor,
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 4.h),
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: data["priority"] == "High"
@@ -114,7 +117,9 @@ class TaskScreen extends StatelessWidget {
                       Text(
                         data["title"],
                         style: AppTextStyle.title3.copyWith(
-                          color: data["priority"] == "High" ? AppColors.lightBackgroundColor : AppColors.darkTextColor,
+                          color: data["priority"] == "High"
+                              ? AppColors.lightBackgroundColor
+                              : AppColors.darkTextColor,
                         ),
                       ),
                     ],

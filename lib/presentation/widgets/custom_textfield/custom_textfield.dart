@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scheduler_pro/core/theme/app_colors.dart';
 import 'package:scheduler_pro/core/theme/app_text_style.dart';
@@ -62,7 +61,9 @@ class CustomTextfield extends StatelessWidget {
                     lastDate: DateTime(2100),
                   );
                   if (date != null) {
-                    context.read<DateAndTimeCubit>().setDate(DateFormat.yMMMd().format(date));
+                    context
+                        .read<DateAndTimeCubit>()
+                        .setDate(DateFormat.yMMMd().format(date));
                   }
                 },
               )
@@ -75,7 +76,9 @@ class CustomTextfield extends StatelessWidget {
                         initialTime: TimeOfDay.now(),
                       );
                       if (time != null) {
-                        context.read<DateAndTimeCubit>().setTime(time.format(context));
+                        context
+                            .read<DateAndTimeCubit>()
+                            .setTime(time.format(context));
                       }
                     },
                   )

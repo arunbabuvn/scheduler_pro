@@ -16,7 +16,7 @@ class AppTheme {
       centerTitle: true,
       surfaceTintColor: AppColors.lightBackgroundColor,
     ),
-    dialogTheme: const DialogTheme(
+    dialogTheme: const DialogThemeData(
       backgroundColor: AppColors.lightBackgroundColor,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
