@@ -41,18 +41,18 @@ class HomeScreen extends StatelessWidget {
                       onTap: () => context.pushNamed("accounts"),
                       child: BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: Image.network(state.firebaseAuth
-                                            .currentUser?.photoURL ??
-                                        "https://s3-alpha-sig.figma.com/img/c007/b96d/10c6847941b93f45858be7d3ce3ff3ec?Expires=1724025600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SxjRywecKMyVDVLFAT6DRDa1BM~63bl4DvNTD7zbsG2ihcYR14C5W-bOtJTjp4PSmA2gEwocBcnqp2t0k1EPcTSFzCNkSoXlgSYu0QDVPgHoiI8z13NBLdEo7HD0ATlfcaoHY6AupjYn9j0-~0lJZN4ydgE2UQCYD~U15A-LM1sYi~dxxF0Hnk1ww7Q8m6c1WQ9bYdl~IbcPcu1AhfcSh8xJsffZ3R0RdOLNaH9itruIJe4yi~AnokhwBggvOOWh7XVX6rYpAkb-VUSFh4n5CA8hEa70irdK8Pm~~cpmvOGjEJyEuyUHeWEKMCHOV14DoAgt47Xx8DkBkJGHOc3d-Q__")
-                                    .image,
-                              ),
-                            ),
-                            width: 40.w,
-                            height: 40.w,
+                          final photoURL =
+                              state.firebaseAuth.currentUser?.photoURL;
+                          return CircleAvatar(
+                            radius: 20.w,
+                            backgroundColor: AppColors.secondartyColor,
+                            backgroundImage: photoURL != null
+                                ? NetworkImage(photoURL)
+                                : null,
+                            child: photoURL == null
+                                ? const Icon(Icons.person,
+                                    color: AppColors.darkTextColor)
+                                : null,
                           );
                         },
                       ),
@@ -216,49 +216,59 @@ class HomeScreen extends StatelessWidget {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 16.w,
-                                                  vertical: 4.h),
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: state.tasks[index]
-                                                              .priority ==
-                                                          "High"
-                                                      ? AppColors
-                                                          .lightBackgroundColor
-                                                      : AppColors.darkTextColor,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  state.tasks[index].title
+                                                      .toString(),
+                                                  style: AppTextStyle.title3
+                                                      .copyWith(
+                                                    color: state.tasks[index]
+                                                                .priority ==
+                                                            "High"
+                                                        ? AppColors
+                                                            .lightBackgroundColor
+                                                        : AppColors
+                                                            .darkTextColor,
+                                                  ),
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                              child: Text(
-                                                state.tasks[index].priority
-                                                    .toString(),
-                                                style:
-                                                    AppTextStyle.small.copyWith(
-                                                  color: state.tasks[index]
-                                                              .priority ==
-                                                          "High"
-                                                      ? AppColors
-                                                          .lightBackgroundColor
-                                                      : AppColors.darkTextColor,
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 16.w,
+                                                      vertical: 4.h),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: state.tasks[index]
+                                                                  .priority ==
+                                                              "High"
+                                                          ? AppColors
+                                                              .lightBackgroundColor
+                                                          : AppColors
+                                                              .darkTextColor,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50),
+                                                  ),
+                                                  child: Text(
+                                                    state.tasks[index].priority
+                                                        .toString(),
+                                                    style: AppTextStyle.small
+                                                        .copyWith(
+                                                      color: state.tasks[index]
+                                                                  .priority ==
+                                                              "High"
+                                                          ? AppColors
+                                                              .lightBackgroundColor
+                                                          : AppColors
+                                                              .darkTextColor,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                            8.verticalSpace,
-                                            Text(
-                                              state.tasks[index].title
-                                                  .toString(),
-                                              style:
-                                                  AppTextStyle.title3.copyWith(
-                                                color: state.tasks[index]
-                                                            .priority ==
-                                                        "High"
-                                                    ? AppColors
-                                                        .lightBackgroundColor
-                                                    : AppColors.darkTextColor,
-                                              ),
+                                              ],
                                             ),
                                             8.verticalSpace,
                                             Row(
